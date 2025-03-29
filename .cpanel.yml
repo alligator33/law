@@ -1,0 +1,24 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/lexfirmglobal/public_html/
+    # Copy main configuration files
+    - /bin/cp composer.json $DEPLOYPATH
+    - /bin/cp composer.lock $DEPLOYPATH
+    - /bin/cp php.ini $DEPLOYPATH
+    - /bin/cp tailwind.config.js $DEPLOYPATH
+    
+    # Deploy backend directory
+    - /bin/cp -R backend $DEPLOYPATH
+    
+    # Deploy public directory
+    - /bin/cp -R public/* $DEPLOYPATH
+    
+    # Deploy vendor directory
+    - /bin/cp -R vendor $DEPLOYPATH
+    
+    # Ensure proper permissions
+    - /bin/chmod 755 $DEPLOYPATH
+    - /bin/chmod 644 $DEPLOYPATH/*.php
+    - /bin/chmod 755 $DEPLOYPATH/backend
+    - /bin/chmod 755 $DEPLOYPATH/vendor
