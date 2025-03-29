@@ -1,5 +1,5 @@
 <?php
-require_once '../src/db/connection.php';
+require_once '../backend/db/connection.php';
 
 try {
     // Test the connection
@@ -32,7 +32,6 @@ try {
         $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
         echo "\nAvailable Tables:\n";
         print_r($tables);
-        
     }
     echo "</pre>";
 } catch (PDOException $e) {

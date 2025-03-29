@@ -1,7 +1,8 @@
 <?php
 header('Content-Type: application/json');
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../src/db/connection.php';
+require_once __DIR__ . '/../../backend/db/connection.php';
+require_once __DIR__ . '/../../backend/controllers/ContactController.php';
 
 use App\Controllers\ContactController;
 

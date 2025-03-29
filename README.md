@@ -2,28 +2,6 @@
 
 This project is a simple single-page website that includes a contact form with email functionality and saves the content to a database. Below are the details for setting up and using the project.
 
-## Project Structure
-
-```
-single-page-website
-├── public
-│   ├── index.php          # Main entry point for the website
-│   ├── contact.php        # Contact form for user submissions
-│   └── styles
-│       └── style.css      # CSS styles for the website
-├── src
-│   ├── db
-│   │   └── connection.php  # Database connection setup
-│   ├── mail
-│   │   └── send_mail.php   # Email sending functionality
-│   └── helpers
-│       └── functions.php    # Helper functions for validation and sanitization
-├── config
-│   └── config.php          # Configuration settings (database credentials, etc.)
-├── .htaccess               # Server configuration for URL rewriting
-├── README.md               # Project documentation
-└── composer.json           # Composer dependencies and autoloading settings
-```
 
 ## Setup Instructions
 
