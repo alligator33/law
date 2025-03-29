@@ -8,10 +8,16 @@ $options = [
 ];
 
 try {
-    $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+    // Construct Neon database DSN with SSL mode
+    $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";sslmode=require";
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
 } catch (PDOException $e) {
     error_log("Database Connection Error: " . $e->getMessage());
-    die("Could not connect to the database. Please check the connection settings.");
+    if (!headers_sent()) {
+        header('HTTP/1.1 500 Internal Server Error');
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Database connection failed']);
+    }
+    exit;
 }
 ?>
