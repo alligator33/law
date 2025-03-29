@@ -6,13 +6,13 @@ define('DB_USER', 'neondb_owner');
 define('DB_PASS', 'npg_lN90UbfkBshI');
 
 // Email settings
-define('EMAIL_TO', 'your_email@example.com');
-define('EMAIL_FROM', 'noreply@yourdomain.com');
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_USER', 'your_email@gmail.com');
-define('SMTP_PASS', ''); // Your Gmail App Password
-define('SMTP_PORT', 587);
-define('SMTP_SECURE', 'tls');
+define('EMAIL_TO', 'norepy@lexfirmglobal.com');
+define('EMAIL_FROM', 'norepy@lexfirmglobal.com');
+define('SMTP_HOST', 'lexfirmglobal.com');
+define('SMTP_USER', 'norepy@lexfirmglobal.com');
+define('SMTP_PASS', '%Js6x*35Ly]');
+define('SMTP_PORT', 465);
+define('SMTP_SECURE', 'ssl');
 
 // Other constants
 define('BASE_URL', 'https://lexfirmglobal.com');

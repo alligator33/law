@@ -3,6 +3,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../backend/db/connection.php';
 require_once __DIR__ . '/../../backend/utils/functions.php';
+require_once __DIR__ . '/../../backend/config/config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -42,14 +43,23 @@ try {
     // Send email using PHPMailer
     $mail = new PHPMailer(true);
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = SMTP_HOST;
     $mail->SMTPAuth = true;
-    $mail->Username = EMAIL_TO;
-    $mail->Password = ''; // Add your app password here
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $mail->Username = SMTP_USER;
+    $mail->Password = SMTP_PASS;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Using SMTPS for port 465
+    $mail->Port = SMTP_PORT;
+    
+    // Additional security options for proper SSL/TLS handling
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => true,
+            'verify_peer_name' => true,
+            'allow_self_signed' => false
+        )
+    );
 
-    $mail->setFrom($email, $name);
+    $mail->setFrom(EMAIL_FROM, $name);
     $mail->addAddress(EMAIL_TO);
     $mail->Subject = 'New Contact Form Submission';
     $mail->Body = "Name: $name\nEmail: $email\nMessage: $message";
