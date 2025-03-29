@@ -16,11 +16,11 @@
             <div class="flex justify-between items-center h-20">
                 <a href="/" class="text-2xl font-crimson font-bold text-law-navy">Law Firm</a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-law-gold transition-colors">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-law-gold transition-colors">About</a>
-                    <a href="#practice-areas" class="text-gray-700 hover:text-law-gold transition-colors">Practice Areas</a>
-                    <a href="#team" class="text-gray-700 hover:text-law-gold transition-colors">Our Team</a>
-                    <a href="#contact" class="text-gray-700 hover:text-law-gold transition-colors">Contact</a>
+                    <a href="/" class="text-gray-700 hover:text-law-gold transition-colors">Home</a>
+                    <a href="/#about" class="text-gray-700 hover:text-law-gold transition-colors">About</a>
+                    <a href="/practice-areas.php" class="text-gray-700 hover:text-law-gold transition-colors">Practice Areas</a>
+                    <a href="/#team" class="text-gray-700 hover:text-law-gold transition-colors">Our Team</a>
+                    <a href="/#contact" class="text-gray-700 hover:text-law-gold transition-colors">Contact</a>
                 </div>
                 <button class="md:hidden" onclick="toggleMobileMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,11 +30,11 @@
             </div>
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden md:hidden pb-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-law-gold">Home</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-law-gold">About</a>
-                <a href="#practice-areas" class="block py-2 text-gray-700 hover:text-law-gold">Practice Areas</a>
-                <a href="#team" class="block py-2 text-gray-700 hover:text-law-gold">Our Team</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-law-gold">Contact</a>
+                <a href="/" class="block py-2 text-gray-700 hover:text-law-gold">Home</a>
+                <a href="/#about" class="block py-2 text-gray-700 hover:text-law-gold">About</a>
+                <a href="/practice-areas.php" class="block py-2 text-gray-700 hover:text-law-gold">Practice Areas</a>
+                <a href="/#team" class="block py-2 text-gray-700 hover:text-law-gold">Our Team</a>
+                <a href="/#contact" class="block py-2 text-gray-700 hover:text-law-gold">Contact</a>
             </div>
         </div>
     </nav>

@@ -68,11 +68,24 @@
             "testimonials": [
                 {
                     "text": "Exceptional service and outstanding results. Highly recommended!",
-                    "author": "David Wilson, CEO"
+                    "author": "David Wilson",
+                    "role": "CEO, Wilson Enterprises",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 5
                 },
                 {
                     "text": "Professional, thorough, and dedicated to their clients' success.",
-                    "author": "Emily Rodriguez, Business Owner"
+                    "author": "Emily Rodriguez",
+                    "role": "Business Owner",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 5
+                },
+                {
+                    "text": "Their expertise in corporate law helped us navigate complex challenges.",
+                    "author": "Michael Chang",
+                    "role": "CFO, Tech Solutions Inc",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 5
                 }
             ]
         },

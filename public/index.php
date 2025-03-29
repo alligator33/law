@@ -49,7 +49,14 @@ $homeConfig = $config['pages']['home'];
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
                     <div class="text-4xl mb-4"><?php echo $practice['icon']; ?></div>
                     <h3 class="text-xl font-crimson mb-3"><?php echo $practice['title']; ?></h3>
-                    <p class="text-gray-600"><?php echo $practice['description']; ?></p>
+                    <p class="text-gray-600 mb-4"><?php echo $practice['description']; ?></p>
+                    <a href="/practice-areas.php#<?php echo strtolower(str_replace(' ', '-', $practice['title'])); ?>" 
+                       class="text-law-gold hover:text-law-navy transition-colors inline-flex items-center">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -72,20 +79,7 @@ $homeConfig = $config['pages']['home'];
     </div>
 </section>
 
-<!-- Testimonials -->
-<section class="py-20 bg-law-navy text-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-crimson mb-12 text-center" data-aos="fade-up">Client Testimonials</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <?php foreach ($homeConfig['testimonials'] as $index => $testimonial): ?>
-                <div class="bg-white/10 p-6 rounded-lg" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <p class="mb-4 italic">"<?php echo $testimonial['text']; ?>"</p>
-                    <p class="text-law-gold">- <?php echo $testimonial['author']; ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
+<?php include 'includes/testimonials.php'; ?>
 
 <!-- Contact Section -->
 <section id="contact" class="py-20 bg-white">
