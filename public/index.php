@@ -1,4 +1,5 @@
 <?php 
+require_once __DIR__ . '/../backend/utils/functions.php';
 include 'includes/header.php';
 $config = getPageConfig();
 $homeConfig = $config['pages']['home'];

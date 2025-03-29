@@ -1,0 +1,86 @@
+{
+    "company_info": {
+        "name": "Lex Firm Global",
+        "phone": "(555) 123-4567",
+        "email": "info@lexfirmglobal.com",
+        "address": {
+            "line1": "123 Legal Street",
+            "line2": "Suite 100",
+            "city": "New York",
+            "state": "NY",
+            "postal_code": "10001"
+        },
+        "social_media": {
+            "linkedin": "https://linkedin.com/company/lexfirmglobal",
+            "twitter": "https://twitter.com/lexfirmglobal"
+        }
+    },
+    "pages": {
+        "home": {
+            "hero": {
+                "background_image": "/assets/images/hero-bg.jpg",
+                "title": "Expert Legal Solutions for Your Success",
+                "subtitle": "Dedicated to providing exceptional legal services with integrity and professionalism",
+                "cta_text": "Contact Us Today"
+            },
+            "about": {
+                "title": "About Our Firm",
+                "content": "With years of experience and a commitment to excellence, we provide comprehensive legal solutions tailored to your needs. Our team of expert attorneys is dedicated to achieving the best possible outcomes for our clients.",
+                "stats": {
+                    "cases_won": "500+",
+                    "success_rate": "98%"
+                }
+            },
+            "practice_areas": [
+                {
+                    "icon": "⚖️",
+                    "title": "Corporate Law",
+                    "description": "Expert guidance in business formation, contracts, and corporate governance."
+                },
+                {
+                    "icon": "🏛️",
+                    "title": "Civil Litigation",
+                    "description": "Skilled representation in complex civil disputes and litigation."
+                },
+                {
+                    "icon": "📜",
+                    "title": "Real Estate Law",
+                    "description": "Comprehensive legal services for real estate transactions and disputes."
+                }
+            ],
+            "team": [
+                {
+                    "name": "John Smith",
+                    "role": "Managing Partner",
+                    "image": "https://placehold.co/400x500"
+                },
+                {
+                    "name": "Sarah Johnson",
+                    "role": "Senior Attorney",
+                    "image": "https://placehold.co/400x500"
+                },
+                {
+                    "name": "Michael Chen",
+                    "role": "Associate Attorney",
+                    "image": "https://placehold.co/400x500"
+                }
+            ],
+            "testimonials": [
+                {
+                    "text": "Exceptional service and outstanding results. Highly recommended!",
+                    "author": "David Wilson, CEO"
+                },
+                {
+                    "text": "Professional, thorough, and dedicated to their clients' success.",
+                    "author": "Emily Rodriguez, Business Owner"
+                }
+            ]
+        },
+        "contact": {
+            "form": {
+                "title": "Get in Touch",
+                "error_message": "An error occurred. Please try again later."
+            }
+        }
+    }
+}
