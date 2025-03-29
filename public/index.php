@@ -1,4 +1,4 @@
-<?php include '../src/helpers/header.php'; ?>
+<?php include 'includes/header.php'; ?>
 
 <!-- Hero Section -->
 <section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80');">
@@ -136,4 +136,4 @@
     </div>
 </section>
 
-<?php include '../src/helpers/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
