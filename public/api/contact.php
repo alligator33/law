@@ -36,46 +36,63 @@ if (!validateEmail($email)) {
 }
 
 try {
-    // Save to database
+    // First save to database
     $stmt = $pdo->prepare("INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)");
     $stmt->execute([$name, $email, $message]);
-
-    // Send email using PHPMailer
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = SMTP_HOST;
-    $mail->SMTPAuth = true;
-    $mail->Username = SMTP_USER;
-    $mail->Password = SMTP_PASS;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Using SMTPS for port 465
-    $mail->Port = SMTP_PORT;
+    $contactId = $pdo->lastInsertId();
     
-    // Additional security options for proper SSL/TLS handling
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => true,
-            'verify_peer_name' => true,
-            'allow_self_signed' => false
-        )
-    );
+    // Then attempt to send email
+    $emailSent = false;
+    try {
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = SMTP_HOST;
+        $mail->SMTPAuth = true;
+        $mail->Username = SMTP_USER;
+        $mail->Password = SMTP_PASS;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = SMTP_PORT;
+        
+        // Additional security options
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => true,
+                'verify_peer_name' => true,
+                'allow_self_signed' => false
+            )
+        );
 
-    $mail->setFrom(EMAIL_FROM, $name);
-    $mail->addAddress(EMAIL_TO);
-    $mail->Subject = 'New Contact Form Submission';
-    $mail->Body = "Name: $name\nEmail: $email\nMessage: $message";
+        $mail->setFrom(EMAIL_FROM, $name);
+        $mail->addAddress(EMAIL_TO);
+        $mail->Subject = 'New Contact Form Submission';
+        $mail->Body = "Name: $name\nEmail: $email\nMessage: $message";
 
-    $mail->send();
-    
-    echo json_encode([
-        'success' => true,
-        'message' => 'Thank you! Your message has been sent successfully.'
-    ]);
+        $mail->send();
+        $emailSent = true;
+        
+        // Update database to mark email as sent
+        $stmt = $pdo->prepare("UPDATE contacts SET email_sent = true WHERE id = ?");
+        $stmt->execute([$contactId]);
 
-} catch (Exception $e) {
-    error_log("Error: " . $e->getMessage());
+        echo json_encode([
+            'success' => true,
+            'message' => 'Thank you! Your message has been received and we will contact you soon.'
+        ]);
+        
+    } catch (Exception $e) {
+        error_log("Email Error for contact ID $contactId: " . $e->getMessage());
+        // Even if email fails, we still saved the contact
+        echo json_encode([
+            'success' => true,
+            'message' => 'Thank you! Your message has been received. We will review it and get back to you soon.'
+        ]);
+    }
+
+} catch (PDOException $e) {
+    error_log("Database Error: " . $e->getMessage());
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Sorry, there was an error sending your message. Please try again later.'
+        'message' => 'Sorry, there was an error saving your message. Please try again later.'
     ]);
 }
