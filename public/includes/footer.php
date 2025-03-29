@@ -1,3 +1,12 @@
+<?php
+require_once __DIR__ . '/../../backend/db/connection.php';
+require_once __DIR__ . '/../../backend/utils/functions.php';
+
+$companyInfo = getCompanyInfo($pdo);
+
+// Use database info if available, otherwise use defaults
+$info = $companyInfo
+?>
 <footer class="bg-law-navy text-white py-12">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -7,10 +16,13 @@
             </div>
             <div>
                 <h3 class="text-xl font-crimson mb-4">Contact</h3>
-                <p class="text-gray-300">123 Legal Street</p>
-                <p class="text-gray-300">New York, NY 10001</p>
-                <p class="text-gray-300">Phone: (555) 123-4567</p>
-                <p class="text-gray-300">Email: info@lawfirm.com</p>
+                <p class="text-gray-300"><?php echo htmlspecialchars($info['address_line1']); ?></p>
+                <?php if (!empty($info['address_line2'])): ?>
+                    <p class="text-gray-300"><?php echo htmlspecialchars($info['address_line2']); ?></p>
+                <?php endif; ?>
+                <p class="text-gray-300"><?php echo htmlspecialchars($info['city']) . ', ' . htmlspecialchars($info['state']) . ' ' . htmlspecialchars($info['postal_code']); ?></p>
+                <p class="text-gray-300">Phone: <?php echo htmlspecialchars($info['phone']); ?></p>
+                <p class="text-gray-300">Email: <?php echo htmlspecialchars($info['email']); ?></p>
             </div>
             <div>
                 <h3 class="text-xl font-crimson mb-4">Quick Links</h3>
