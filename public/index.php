@@ -1,12 +1,16 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+include 'includes/header.php';
+$config = getPageConfig();
+$homeConfig = $config['pages']['home'];
+?>
 
 <!-- Hero Section -->
-<section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80');">
+<section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('<?php echo $homeConfig['hero']['background_image']; ?>');">
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="container mx-auto px-4 z-10 text-center" data-aos="fade-up">
-        <h1 class="text-4xl md:text-6xl font-crimson mb-6 text-white">Excellence in Legal Services</h1>
-        <p class="text-xl mb-8 max-w-2xl mx-auto text-gray-200">Dedicated to protecting your rights and securing your future with expert legal representation.</p>
-        <a href="#contact" class="bg-law-gold hover:bg-law-gold/90 text-white px-8 py-3 rounded transition-colors inline-block">Schedule Consultation</a>
+        <h1 class="text-4xl md:text-6xl font-crimson mb-6 text-white"><?php echo $homeConfig['hero']['title']; ?></h1>
+        <p class="text-xl mb-8 max-w-2xl mx-auto text-gray-200"><?php echo $homeConfig['hero']['subtitle']; ?></p>
+        <a href="#contact" class="bg-law-gold hover:bg-law-gold/90 text-white px-8 py-3 rounded transition-colors inline-block"><?php echo $homeConfig['hero']['cta_text']; ?></a>
     </div>
 </section>
 
@@ -18,15 +22,15 @@
                 <img src="https://placehold.co/600x400" alt="About Us" class="rounded-lg shadow-lg">
             </div>
             <div data-aos="fade-left">
-                <h2 class="text-3xl font-crimson mb-6 text-law-navy">About Our Firm</h2>
-                <p class="mb-6 text-gray-600">With over 20 years of experience, our law firm has been at the forefront of providing exceptional legal services to our clients.</p>
+                <h2 class="text-3xl font-crimson mb-6 text-law-navy"><?php echo $homeConfig['about']['title']; ?></h2>
+                <p class="mb-6 text-gray-600"><?php echo $homeConfig['about']['content']; ?></p>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="text-center p-4 bg-law-gray rounded-lg">
-                        <h3 class="text-2xl font-bold text-law-gold">500+</h3>
+                        <h3 class="text-2xl font-bold text-law-gold"><?php echo $homeConfig['about']['stats']['cases_won']; ?></h3>
                         <p class="text-gray-600">Cases Won</p>
                     </div>
                     <div class="text-center p-4 bg-law-gray rounded-lg">
-                        <h3 class="text-2xl font-bold text-law-gold">98%</h3>
+                        <h3 class="text-2xl font-bold text-law-gold"><?php echo $homeConfig['about']['stats']['success_rate']; ?></h3>
                         <p class="text-gray-600">Success Rate</p>
                     </div>
                 </div>
@@ -40,20 +44,11 @@
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Our Practice Areas</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <?php
-            $practices = [
-                ['title' => 'Corporate Law', 'icon' => '⚖️'],
-                ['title' => 'Family Law', 'icon' => '👨‍👩‍👧‍👦'],
-                ['title' => 'Real Estate', 'icon' => '🏠'],
-                ['title' => 'Criminal Defense', 'icon' => '⚔️'],
-                ['title' => 'Personal Injury', 'icon' => '🏥'],
-                ['title' => 'Intellectual Property', 'icon' => '💡']
-            ];
-            foreach ($practices as $index => $practice): ?>
+            <?php foreach ($homeConfig['practice_areas'] as $index => $practice): ?>
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <div class="text-4xl mb-4"><?= $practice['icon'] ?></div>
-                    <h3 class="text-xl font-crimson mb-3"><?= $practice['title'] ?></h3>
-                    <p class="text-gray-600">Expert legal services in <?= $practice['title'] ?> to protect your interests and achieve your goals.</p>
+                    <div class="text-4xl mb-4"><?php echo $practice['icon']; ?></div>
+                    <h3 class="text-xl font-crimson mb-3"><?php echo $practice['title']; ?></h3>
+                    <p class="text-gray-600"><?php echo $practice['description']; ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -65,17 +60,11 @@
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Our Expert Team</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <?php
-            $team = [
-                ['name' => 'John Smith', 'role' => 'Senior Partner', 'image' => 'https://placehold.co/400x500'],
-                ['name' => 'Sarah Johnson', 'role' => 'Corporate Law Specialist', 'image' => 'https://placehold.co/400x500'],
-                ['name' => 'Michael Brown', 'role' => 'Family Law Attorney', 'image' => 'https://placehold.co/400x500']
-            ];
-            foreach ($team as $index => $member): ?>
+            <?php foreach ($homeConfig['team'] as $index => $member): ?>
                 <div class="text-center" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <img src="<?= $member['image'] ?>" alt="<?= $member['name'] ?>" class="w-full h-80 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-crimson mb-2"><?= $member['name'] ?></h3>
-                    <p class="text-gray-600"><?= $member['role'] ?></p>
+                    <img src="<?php echo $member['image']; ?>" alt="<?php echo $member['name']; ?>" class="w-full h-80 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-crimson mb-2"><?php echo $member['name']; ?></h3>
+                    <p class="text-gray-600"><?php echo $member['role']; ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -87,15 +76,10 @@
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-crimson mb-12 text-center" data-aos="fade-up">Client Testimonials</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <?php
-            $testimonials = [
-                ['text' => 'The team provided exceptional service throughout my case. Their expertise and dedication were invaluable.', 'author' => 'Robert Wilson'],
-                ['text' => 'I am extremely satisfied with the results. They handled my case professionally and with great attention to detail.', 'author' => 'Emily Parker']
-            ];
-            foreach ($testimonials as $index => $testimonial): ?>
+            <?php foreach ($homeConfig['testimonials'] as $index => $testimonial): ?>
                 <div class="bg-white/10 p-6 rounded-lg" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <p class="mb-4 italic">"<?= $testimonial['text'] ?>"</p>
-                    <p class="text-law-gold">- <?= $testimonial['author'] ?></p>
+                    <p class="mb-4 italic">"<?php echo $testimonial['text']; ?>"</p>
+                    <p class="text-law-gold">- <?php echo $testimonial['author']; ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -106,8 +90,11 @@
 <section id="contact" class="py-20 bg-white">
     <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Contact Us</h2>
-            <form action="contact.php" method="POST" class="space-y-6" data-aos="fade-up">
+            <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up"><?php echo $config['pages']['contact']['form']['title']; ?></h2>
+            
+            <div id="contactMessage" class="mb-6 p-4 rounded-lg hidden"></div>
+            
+            <form id="contactForm" class="space-y-6" data-aos="fade-up">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="name" class="block text-gray-700 mb-2">Name</label>
@@ -135,5 +122,48 @@
         </div>
     </div>
 </section>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const messageDiv = document.getElementById('contactMessage');
+    const submitButton = this.querySelector('button[type="submit"]');
+    const formData = new FormData(this);
+    
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'Sending...';
+    
+    try {
+        const response = await fetch('/api/contact.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        messageDiv.classList.remove('hidden', 'bg-red-100', 'bg-green-100', 'text-red-700', 'text-green-700');
+        
+        if (response.ok && result.success) {
+            messageDiv.classList.add('bg-green-100', 'text-green-700');
+            this.reset();
+        } else {
+            messageDiv.classList.add('bg-red-100', 'text-red-700');
+        }
+        
+        messageDiv.textContent = result.message;
+        
+    } catch (error) {
+        messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+        messageDiv.classList.add('bg-red-100', 'text-red-700');
+        messageDiv.textContent = '<?php echo $config['pages']['contact']['form']['error_message']; ?>';
+    }
+    
+    submitButton.disabled = false;
+    submitButton.innerHTML = 'Send Message';
+    
+    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+</script>
 
 <?php include 'includes/footer.php'; ?>
