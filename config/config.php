@@ -1,8 +1,8 @@
 <?php
 // Configuration settings for the project
 
-// Database credentials
-define('DB_HOST', 'localhost');
+// Database credentials using the server information
+define('DB_HOST', 'premium151.web-hosting.com'); // Server name from cPanel
 define('DB_NAME', 'lexfqppd_law');
 define('DB_USER', 'exfqppd_lawyer');
 define('DB_PASS', 'g?s1n=OTK?nD');
