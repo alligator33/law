@@ -86,6 +86,41 @@
                     "role": "CFO, Tech Solutions Inc",
                     "image": "https://placehold.co/100x100",
                     "rating": 5
+                },
+                {
+                    "text": "The team was incredibly responsive and provided excellent legal advice.",
+                    "author": "Sophia Martinez",
+                    "role": "Founder, Creative Co.",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 5
+                },
+                {
+                    "text": "I felt confident and well-represented throughout the entire process.",
+                    "author": "James Anderson",
+                    "role": "Entrepreneur",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 4
+                },
+                {
+                    "text": "Their attention to detail and professionalism are unmatched.",
+                    "author": "Olivia Brown",
+                    "role": "Managing Director, Brown Holdings",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 5
+                },
+                {
+                    "text": "A trustworthy firm that truly cares about their clients' needs.",
+                    "author": "Liam Davis",
+                    "role": "Investor",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 5
+                },
+                {
+                    "text": "They provided clear guidance and achieved great results for our case.",
+                    "author": "Emma Wilson",
+                    "role": "Operations Manager, Wilson Logistics",
+                    "image": "https://placehold.co/100x100",
+                    "rating": 4
                 }
             ]
         },
