@@ -1,0 +1,16 @@
+{
+    "name": "single-page-website",
+    "description": "A simple single-page website with contact functionality.",
+    "type": "project",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "phpmailer/phpmailer": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
