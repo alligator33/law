@@ -1,10 +1,28 @@
-Options +FollowSymLinks
 RewriteEngine On
+RewriteBase /
 
-# Remove .php extension from URLs
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^/]+)/?$ $1.php [L]
+# Handle API requests
+RewriteRule ^api/(.*)$ public/api/$1 [L]
 
-# Redirect to index.php for all other requests
-RewriteRule ^$ public/index.php [L]
+# Redirect all other requests to public directory
+RewriteCond %{REQUEST_URI} !^/public/
 RewriteRule ^(.*)$ public/$1 [L]
+
+# If requested file does not exist, redirect to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security: Prevent directory listing
+Options -Indexes
+
+# Security: Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(^|/)\.(git|env|config)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

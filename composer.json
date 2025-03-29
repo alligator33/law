@@ -1,16 +1,14 @@
 {
-    "name": "single-page-website",
-    "description": "A simple single-page website with contact functionality.",
+    "name": "law-firm/website",
+    "description": "Law Firm Website with API Endpoints",
     "type": "project",
-    "require": {
-        "php": "^7.4 || ^8.0",
-        "phpmailer/phpmailer": "^6.5"
-    },
     "autoload": {
         "psr-4": {
-            "Src\\": "src/"
+            "App\\": "src/"
         }
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    "require": {
+        "php": ">=7.4",
+        "phpmailer/phpmailer": "^6.8"
+    }
 }
