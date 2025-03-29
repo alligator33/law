@@ -1,11 +1,11 @@
 <?php
 // Configuration settings for the project
 
-// Database credentials using the server information
-define('DB_HOST', 'premium151.web-hosting.com'); // Server name from cPanel
-define('DB_NAME', 'lexfqppd_law');
-define('DB_USER', 'exfqppd_lawyer');
-define('DB_PASS', 'g?s1n=OTK?nD');
+// Database credentials for PostgreSQL
+define('DB_HOST', 'ep-winter-heart-a5mhn4qz-pooler.us-east-2.aws.neon.tech');
+define('DB_NAME', 'neondb');
+define('DB_USER', 'neondb_owner');
+define('DB_PASS', 'npg_lN90UbfkBshI');
 
 // Email settings
 define('EMAIL_TO', 'your_email@example.com');

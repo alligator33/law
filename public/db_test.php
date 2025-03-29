@@ -1,5 +1,5 @@
 <?php
-require_once '../backend/db/connection.php';
+require_once __DIR__ . '/../backend/db/connection.php';
 
 try {
     // Test the connection
@@ -13,22 +13,22 @@ try {
         // Check if we can query the database
         $stmt = $pdo->query("SELECT version()");
         $version = $stmt->fetch(PDO::FETCH_NUM)[0];
-        echo "\nMySQL Version: " . htmlspecialchars($version) . "\n";
+        echo "\nPostgreSQL Version: " . htmlspecialchars($version) . "\n";
         
-        // Test creating the contacts table if it doesn't exist
+        // Check if the contacts table exists, if not create it
         $sql = "CREATE TABLE IF NOT EXISTS contacts (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
             message TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
         )";
         
         $pdo->exec($sql);
         echo "\n✅ Contacts table created/verified successfully!\n";
         
-        // Check if we can list tables
-        $stmt = $pdo->query("SHOW TABLES");
+        // List all tables in the public schema
+        $stmt = $pdo->query("SELECT tablename FROM pg_tables WHERE schemaname = 'public'");
         $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
         echo "\nAvailable Tables:\n";
         print_r($tables);
