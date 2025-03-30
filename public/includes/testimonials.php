@@ -4,70 +4,60 @@ $config = getPageConfig();
 $homeConfig = $config['pages']['home'];
 ?>
 
-<!-- Testimonials -->
-<section class="py-20 bg-law-navy text-white">
+<!-- Testimonials Section -->
+<section class="py-20 bg-law-navy text-white relative" style="background-image: url('/assets/images/hero/dotted-background.webp'); background-size: cover; background-position: center;">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-crimson mb-12 text-center" data-aos="fade-up">Client Testimonials</h2>
-        
-        <!-- Swiper container for the carousel -->
-        <div class="swiper-container" data-aos="fade-up">
-            <div class="swiper-wrapper">
+        <h2 class="text-3xl font-crimson mb-12 text-center" data-aos="fade-up">What Our Clients Say</h2>
+
+        <!-- Embla Carousel -->
+        <div class="testimonials-embla" data-aos="fade-up">
+            <div class="testimonials-embla__container">
                 <?php foreach ($homeConfig['testimonials'] as $index => $testimonial): ?>
-                    <div class="swiper-slide">
-                        <div class="bg-white/10 p-6 rounded-lg">
+                    <div class="testimonials-embla__slide p-6">
+                        <div class="bg-white text-law-navy p-6 rounded-lg shadow-lg">
                             <div class="flex items-center mb-4">
-                                <img class="w-12 h-12 rounded-full mr-4" src="<?= $testimonial['image'] ?? 'https://placehold.co/100x100' ?>" alt="<?= $testimonial['author']; ?>">
+                                <img src="<?php echo isset($testimonial['image']) ? $testimonial['image'] : '/assets/images/default-avatar.png'; ?>" alt="<?php echo isset($testimonial['name']) ? $testimonial['name'] : 'Anonymous'; ?>" class="w-16 h-16 rounded-full mr-4">
                                 <div>
-                                    <h3 class="font-semibold text-lg"><?= $testimonial['author']; ?></h3>
-                                    <p class="text-sm text-law-gold"><?= $testimonial['role'] ?? ''; ?></p>
+                                    <h3 class="text-lg font-bold"><?php echo isset($testimonial['name']) ? $testimonial['name'] : 'Anonymous'; ?></h3>
+                                    <p class="text-sm text-gray-600"><?php echo isset($testimonial['role']) ? $testimonial['role'] : 'Client'; ?></p>
                                 </div>
                             </div>
-                            <p class="mb-4 italic">"<?php echo $testimonial['text']; ?>"</p>
-                            <?php if (isset($testimonial['rating'])): ?>
-                            <div class="flex">
-                                <?php for ($i = 0; $i < 5; $i++): ?>
-                                    <svg class="w-4 h-4 fill-yellow-500 <?= $i < $testimonial['rating'] ? 'text-yellow-500' : 'text-gray-400' ?>" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 17.77L18.18 21l-1.64-7.03L21 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                    </svg>
-                                <?php endfor; ?>
-                            </div>
-                            <?php endif; ?>
+                            <p class="text-gray-700 italic">"<?php echo isset($testimonial['quote']) ? $testimonial['quote'] : 'No testimonial provided.'; ?>"</p>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
-
-            <!-- Swiper controls -->
-            <div class="swiper-button-prev text-white"></div>
-            <div class="swiper-button-next text-white"></div>
         </div>
     </div>
 </section>
 
-<!-- Include Swiper CSS and JS -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Include Embla Carousel -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/embla-carousel/embla-carousel.min.css">
+<script src="https://cdn.jsdelivr.net/npm/embla-carousel/embla-carousel.umd.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
-                },
-                768: {
-                    slidesPerView: 2,
-                },
-                1024: {
-                    slidesPerView: 3,
-                }
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        const testimonialsEmblaNode = document.querySelector('.testimonials-embla');
+        const testimonialsEmbla = EmblaCarousel(testimonialsEmblaNode, {
+            loop: true,
+            align: 'center',
+            speed: 5,
         });
     });
 </script>
+
+<style>
+.testimonials-embla {
+    overflow: hidden;
+    position: relative;
+}
+.testimonials-embla__container {
+    display: flex;
+    gap: 1rem;
+}
+.testimonials-embla__slide {
+    flex: 0 0 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+</style>

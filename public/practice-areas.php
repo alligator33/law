@@ -19,6 +19,7 @@ $config = getPageConfig();
                 <a href="#family-law" class="bg-white/10 hover:bg-law-gold transition-colors px-6 py-3 rounded-lg">Family Law</a>
                 <a href="#intellectual-property" class="bg-white/10 hover:bg-law-gold transition-colors px-6 py-3 rounded-lg">Intellectual Property</a>
             </div>
+            </div>
         </div>
     </section>
 

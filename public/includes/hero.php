@@ -2,10 +2,10 @@
 // Hero Section with Embla Carousel slideshow
 ?>
 <section id="home" class="relative h-screen">
-    <div class="embla h-full overflow-hidden">
-        <div class="embla__container h-full flex">
+    <div class="hero-embla h-full overflow-hidden">
+        <div class="hero-embla__container h-full flex">
             <!-- Slide 1 -->
-            <div class="embla__slide flex-shrink-0 relative h-full w-full bg-cover bg-center" style="background-image: url('/assets/images/hero/hero1.jpg');">
+            <div class="hero-embla__slide flex-shrink-0 relative h-full w-full bg-cover bg-center" style="background-image: url('/assets/images/hero/hero1.jpg');">
                 <div class="absolute inset-0 bg-black/60"></div>
                 <div class="container mx-auto px-4 z-10 text-center flex items-center justify-center h-full" data-aos="fade-up">
                     <div>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <!-- Slide 2 -->
-            <div class="embla__slide flex-shrink-0 relative h-full w-full bg-cover bg-center" style="background-image: url('/assets/images/hero/hero2.jpg');">
+            <div class="hero-embla__slide flex-shrink-0 relative h-full w-full bg-cover bg-center" style="background-image: url('/assets/images/hero/hero2.jpg');">
                 <div class="absolute inset-0 bg-black/60"></div>
                 <div class="container mx-auto px-4 z-10 text-center flex items-center justify-center h-full" data-aos="fade-up">
                     <div>
@@ -36,8 +36,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const emblaNode = document.querySelector('.embla');
-        const embla = EmblaCarousel(emblaNode, {
+        const heroEmblaNode = document.querySelector('.hero-embla');
+        const heroEmbla = EmblaCarousel(heroEmblaNode, {
             loop: true,
             align: 'start',
             speed: 5,
@@ -46,23 +46,23 @@
 </script>
 
 <style>
-.embla {
+.hero-embla {
     position: relative;
     height: 100%;
 }
-.embla__container {
+.hero-embla__container {
     display: flex;
     height: 100%;
     transition: transform 0.3s ease;
 }
-.embla__slide {
+.hero-embla__slide {
     position: relative;
     flex: 0 0 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
 }
-.embla__slide .container {
+.hero-embla__slide .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,19 +70,5 @@
     height: 100%;
     text-align: center;
     padding: 1rem;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .embla__slide .container h1 {
-        font-size: 2rem;
-    }
-    .embla__slide .container p {
-        font-size: 1rem;
-    }
-    .embla__slide .container a {
-        font-size: 0.875rem;
-        padding: 0.5rem 1rem;
-    }
 }
 </style>
