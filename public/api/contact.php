@@ -7,6 +7,7 @@ require_once __DIR__ . '/../../backend/config/config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -45,27 +46,52 @@ try {
     $emailSent = false;
     try {
         $mail = new PHPMailer(true);
+        
+        // Enable debug output
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $debugOutput = '';
+        $mail->Debugoutput = function($str, $level) use (&$debugOutput) {
+            $debugOutput .= "$str\n";
+            error_log("SMTP Debug: $str");
+        };
+
+        // Server settings
         $mail->isSMTP();
         $mail->Host = SMTP_HOST;
         $mail->SMTPAuth = true;
+        $mail->AuthType = 'LOGIN';
         $mail->Username = SMTP_USER;
         $mail->Password = SMTP_PASS;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = SMTP_PORT;
         
-        // Additional security options
+        // Set timeout
+        $mail->Timeout = 30;
+        
+        // Simple SSL settings
         $mail->SMTPOptions = array(
             'ssl' => array(
-                'verify_peer' => true,
-                'verify_peer_name' => true,
-                'allow_self_signed' => false
+                'verify_peer' => false,
+                'verify_peer_name' => false
             )
         );
 
+        // Recipients
         $mail->setFrom(EMAIL_FROM, $name);
+        $mail->addReplyTo($email, $name);
         $mail->addAddress(EMAIL_TO);
+        
+        // Content
+        $mail->isHTML(true);
         $mail->Subject = 'New Contact Form Submission';
-        $mail->Body = "Name: $name\nEmail: $email\nMessage: $message";
+        $mail->Body = "
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> {$name}</p>
+            <p><strong>Email:</strong> {$email}</p>
+            <p><strong>Message:</strong></p>
+            <p>{$message}</p>
+        ";
+        $mail->AltBody = "Name: $name\nEmail: $email\nMessage: $message";
 
         $mail->send();
         $emailSent = true;
@@ -81,6 +107,12 @@ try {
         
     } catch (Exception $e) {
         error_log("Email Error for contact ID $contactId: " . $e->getMessage());
+        error_log("SMTP Debug Log:\n" . $debugOutput);
+        
+        // Store SMTP error in database
+        $stmt = $pdo->prepare("UPDATE contacts SET smtp_error = ? WHERE id = ?");
+        $stmt->execute([$e->getMessage() . "\n\n" . $debugOutput, $contactId]);
+        
         // Even if email fails, we still saved the contact
         echo json_encode([
             'success' => true,

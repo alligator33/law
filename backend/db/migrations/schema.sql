@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS contacts (
     email VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
     email_sent BOOLEAN DEFAULT FALSE,
+    smtp_error TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 

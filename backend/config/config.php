@@ -8,7 +8,7 @@ define('DB_PASS', 'npg_lN90UbfkBshI');
 // Email settings
 define('EMAIL_TO', 'norepy@lexfirmglobal.com');
 define('EMAIL_FROM', 'norepy@lexfirmglobal.com');
-define('SMTP_HOST', 'lexfirmglobal.com');
+define('SMTP_HOST', 'premium151.web-hosting.com');  // Updated to use actual server hostname
 define('SMTP_USER', 'norepy@lexfirmglobal.com');
 define('SMTP_PASS', '%Js6x*35Ly]');
 define('SMTP_PORT', 465);

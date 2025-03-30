@@ -8,9 +8,12 @@ $options = [
 ];
 
 try {
-    // Construct Neon database DSN with SSL mode
-    $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";sslmode=require";
+    // Construct Neon database DSN with system SSL certificates
+    $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";sslmode=verify-full;sslrootcert=system";
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+
+    // Test the connection
+    $pdo->query('SELECT 1');
 } catch (PDOException $e) {
     error_log("Database Connection Error: " . $e->getMessage());
     if (!headers_sent()) {
