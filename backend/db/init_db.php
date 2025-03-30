@@ -1,25 +1,23 @@
 <?php
-require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/connection.php';
 
-function initializeDatabase() {
-    try {
-        // Create a new PDO instance
-        $pdo = new PDO("sqlite:" . DB_FILE);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        // Read and execute the schema file
-        $schema = file_get_contents(__DIR__ . '/migrations/schema.sql');
-        $pdo->exec($schema);
-        
-        echo "Database initialized successfully\n";
-        return true;
-    } catch (PDOException $e) {
-        echo "Error initializing database: " . $e->getMessage() . "\n";
-        return false;
-    }
-}
-
-// Run initialization if this script is executed directly
-if (php_sapi_name() === 'cli' && basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
-    initializeDatabase();
+try {
+    // Read the schema file
+    $schema = file_get_contents(__DIR__ . '/migrations/schema.sql');
+    
+    // Execute the schema
+    $pdo->exec($schema);
+    
+    echo "✅ Database tables created successfully!\n";
+    
+    // Verify tables exist
+    $result = $pdo->query("SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname = 'public'");
+    $tables = $result->fetchAll(PDO::FETCH_COLUMN);
+    
+    echo "\nAvailable tables:\n";
+    print_r($tables);
+    
+} catch (PDOException $e) {
+    echo "❌ Error initializing database: " . $e->getMessage() . "\n";
+    exit(1);
 }

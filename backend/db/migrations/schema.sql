@@ -1,6 +1,8 @@
--- Initial database schema
+-- Drop tables if they exist
+DROP TABLE IF EXISTS contacts;
 
-CREATE TABLE IF NOT EXISTS contacts (
+-- Create contacts table with proper PostgreSQL syntax
+CREATE TABLE contacts (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
