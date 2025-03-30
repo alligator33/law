@@ -56,7 +56,7 @@ $testimonials = [
                         <div class="bg-white text-law-navy p-6 rounded-lg shadow-lg">
                             <div class="flex items-center mb-4">
                                 <img src="<?php echo $testimonial['image']; ?>" alt="<?php echo $testimonial['name']; ?>" class="w-16 h-16 rounded-full mr-4">
-                                <div>
+                                <div class="px-4">
                                     <h3 class="text-lg font-bold"><?php echo $testimonial['name']; ?></h3>
                                     <p class="text-sm text-gray-600"><?php echo $testimonial['role']; ?></p>
                                 </div>
@@ -92,6 +92,7 @@ $testimonials = [
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 1rem; /* Add spacing below the image */
 }
 .testimonials-embla__slide .bg-white {
     background-color: #071512; /* Theme color */
