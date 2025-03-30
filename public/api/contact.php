@@ -2,6 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -15,18 +19,11 @@ set_error_handler("errorHandler");
 try {
     // Load configuration first to catch any config errors
     require_once __DIR__ . '/../../backend/config/config.php';
+    require_once __DIR__ . '/../../backend/db/connection.php';
+    require_once __DIR__ . '/../../backend/utils/functions.php';
     
     error_log("Configuration loaded successfully");
     error_log("Database settings: Host=" . DB_HOST . ", Database=" . DB_NAME . ", User=" . DB_USER);
-    
-    // Then try database connection
-    require_once __DIR__ . '/../../backend/db/connection.php';
-    require_once __DIR__ . '/../../backend/utils/functions.php';
-
-    // Rest of your existing code...
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    use PHPMailer\PHPMailer\SMTP;
 
     // Get POST data
     $name = sanitizeInput($_POST['name'] ?? '');
