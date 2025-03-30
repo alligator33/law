@@ -36,25 +36,23 @@ $homeConfig = $config['pages']['home'];
     </div>
 </section>
 
-<!-- Practice Areas -->
+<!-- Practice Areas Section -->
 <section id="practice-areas" class="py-20 bg-law-gray">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Our Practice Areas</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <?php foreach ($homeConfig['practice_areas'] as $index => $practice): ?>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <div class="text-4xl mb-4"><?php echo $practice['icon']; ?></div>
-                    <h3 class="text-xl font-crimson mb-3"><?php echo $practice['title']; ?></h3>
-                    <p class="text-gray-600 mb-4"><?php echo $practice['description']; ?></p>
-                    <a href="/practice-areas.php#<?php echo strtolower(str_replace(' ', '-', $practice['title'])); ?>" 
-                       class="text-law-gold hover:text-law-navy transition-colors inline-flex items-center">
-                        Learn More
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                </div>
-            <?php endforeach; ?>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" style="background-image: url('/assets/images/practices/accident.jpg'); background-size: cover; background-position: center;">
+                <h3 class="text-xl font-bold text-law-navy mb-4">Accident Law</h3>
+                <p class="text-gray-600">We provide expert legal services for accident-related cases.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" style="background-image: url('/assets/images/practices/family.jpg'); background-size: cover; background-position: center;">
+                <h3 class="text-xl font-bold text-law-navy mb-4">Family Law</h3>
+                <p class="text-gray-600">Helping families resolve legal matters with care and expertise.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" style="background-image: url('/assets/images/practices/business.jpg'); background-size: cover; background-position: center;">
+                <h3 class="text-xl font-bold text-law-navy mb-4">Business Law</h3>
+                <p class="text-gray-600">Providing legal solutions for businesses of all sizes.</p>
+            </div>
         </div>
     </div>
 </section>
