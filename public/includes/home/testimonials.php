@@ -83,8 +83,8 @@ $testimonials = [
     transition: transform 0.3s ease;
 }
 .testimonials-embla__slide {
-    flex: 0 0 80%;
-    max-width: 300px;
+    flex: 0 0 45%;
+    max-width: 45%;
     margin: 0 auto;
 }
 .testimonials-embla__slide img {
@@ -92,6 +92,14 @@ $testimonials = [
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
+}
+.testimonials-embla__slide .bg-white {
+    background-color: #071512; /* Theme color */
+    color: #ffffff;
+    border: 1px solid #1c3d5a; /* Subtle border for theme */
+}
+.testimonials-embla__slide .bg-white p {
+    color: #d1d5db; /* Light gray for text */
 }
 </style>
 
@@ -102,6 +110,7 @@ $testimonials = [
             loop: true,
             align: 'center',
             speed: 5,
+            slidesToScroll: 2, // Show two testimonials at once
         });
     });
 </script>
