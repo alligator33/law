@@ -12,8 +12,7 @@ if (file_exists($envFile)) {
 }
 
 // Database credentials for Neon PostgreSQL
-// Using direct pooler connection string
-define('DB_HOST', 'ep-winter-heart-a5mhn4qz.us-east-2.aws.neon.tech');  // Removed -pooler from hostname
+define('DB_HOST', 'ep-winter-heart-a5mhn4qz.us-east-2.aws.neon.tech');
 define('DB_NAME', 'neondb');
 define('DB_USER', 'neondb_owner');
 define('DB_PASS', 'npg_lN90UbfkBshI');

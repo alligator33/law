@@ -8,7 +8,7 @@ $options = [
 ];
 
 try {
-    // Simple DSN with SSL mode
+    // Use the tested working configuration
     $dsn = sprintf(
         "pgsql:host=%s;dbname=%s;sslmode=require",
         DB_HOST,
@@ -29,7 +29,10 @@ try {
         header('Content-Type: application/json');
         echo json_encode([
             'success' => false, 
-            'message' => 'Database connection failed'
+            'message' => 'Database connection failed',
+            'debug' => [
+                'error' => $e->getMessage()
+            ]
         ]);
     }
     exit;
