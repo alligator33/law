@@ -8,11 +8,13 @@ $options = [
 ];
 
 try {
-    // Use the tested working configuration
+    // Include endpoint ID in the connection string for SNI workaround
+    $endpointId = 'ep-winter-heart-a5mhn4qz';
     $dsn = sprintf(
-        "pgsql:host=%s;dbname=%s;sslmode=require",
+        "pgsql:host=%s;dbname=%s;sslmode=require;options=--client_encoding=UTF8 endpoint=%s",
         DB_HOST,
-        DB_NAME
+        DB_NAME,
+        $endpointId
     );
     
     // Create connection
