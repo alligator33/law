@@ -66,7 +66,7 @@
                 <div class="navbar-links hidden md:flex space-x-8">
                     <a href="/" class="text-gray-700 hover:text-law-gold transition-colors">Home</a>
                     <a href="/#about" class="text-gray-700 hover:text-law-gold transition-colors">About</a>
-                    <a href="/practice-areas.php" class="text-gray-700 hover:text-law-gold transition-colors">Practice
+                    <a href="/practice-page.php" class="text-gray-700 hover:text-law-gold transition-colors">Practice
                         Areas</a>
                     <a href="/#team" class="text-gray-700 hover:text-law-gold transition-colors">Our Team</a>
                     <a href="/#contact" class="text-gray-700 hover:text-law-gold transition-colors">Contact</a>
@@ -83,7 +83,7 @@
             <div class="navbar-menu">
                 <a href="/" class="block py-2 text-gray-700 hover:text-law-gold">Home</a>
                 <a href="/#about" class="block py-2 text-gray-700 hover:text-law-gold">About</a>
-                <a href="/practice-areas.php" class="block py-2 text-gray-700 hover:text-law-gold">Practice Areas</a>
+                <a href="/practice-page.php" class="block py-2 text-gray-700 hover:text-law-gold">Practice Areas</a>
                 <a href="/#team" class="block py-2 text-gray-700 hover:text-law-gold">Our Team</a>
                 <a href="/#contact" class="block py-2 text-gray-700 hover:text-law-gold">Contact</a>
             </div>
