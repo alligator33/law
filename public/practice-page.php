@@ -12,11 +12,7 @@ $config = getPageConfig();
             <p class="text-xl text-gray-300 max-w-3xl mx-auto">Comprehensive legal expertise across multiple disciplines to serve your needs</p>
             <div class="mt-12 flex flex-wrap justify-center gap-4">
                 <!-- Dynamic Navigation Links -->
-                <?php foreach ($config['pages']['home']['practice_areas'] as $area): ?>
-                    <a href="#<?php echo strtolower(str_replace(' ', '-', $area['title'])); ?>" class="bg-white/10 hover:bg-law-gold transition-colors px-6 py-3 rounded-lg">
-                        <?php echo $area['title']; ?>
-                    </a>
-                <?php endforeach; ?>
+     
             </div>
         </div>
     </section>
@@ -87,41 +83,72 @@ $config = getPageConfig();
 </main>
 
 <script>
-// Smooth scrolling for the anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const section = document.querySelector(this.getAttribute('href'));
-        if (section) {
-            section.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Highlight current section in navigation
-window.addEventListener('scroll', function() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.container a[href^="#"]');
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for the anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
     
-    let currentSection = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 150) {
-            currentSection = section.getAttribute('id');
-        }
-    });
+    anchorLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').slice(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                const headerOffset = 80; // Adjust this value based on your header height
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    navLinks.forEach(link => {
-        link.classList.remove('text-law-gold');
-        if (link.getAttribute('href').substring(1) === currentSection) {
-            link.classList.add('text-law-gold');
-        }
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 });
 </script>
+
+<style>
+/* Practice area navigation styling */
+.container .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container .flex a {
+    flex: 0 1 auto;
+    min-width: 200px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.container .flex a:hover {
+    background-color: var(--law-gold, #FFD700);
+    color: var(--law-navy, #1A202C);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .container .flex a {
+        min-width: 160px;
+        font-size: 0.95rem;
+    }
+}
+</style>
 
 <?php include 'includes/footer.php'; ?>
