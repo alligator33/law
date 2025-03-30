@@ -57,7 +57,8 @@ $homeConfig = $config['pages']['home'];
     </div>
 </section>
 
-<?php include 'includes/team.php'; ?>
+<!-- Team Section -->
+<?php include 'includes/team_and_practice_areas.php'; ?>
 
 <?php include 'includes/testimonials.php'; ?>
 

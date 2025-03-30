@@ -5,9 +5,9 @@ $homeConfig = $config['pages']['home'];
 ?>
 
 <!-- Testimonials Section -->
-<section class="py-20 bg-law-navy text-white relative" style="background-image: url('/assets/images/hero/dotted-background.webp'); background-size: cover; background-position: center;">
+<section class="py-20 bg-law-navy  relative" style="background-image: url('/assets/images/hero/dotted-background.webp'); background-size: cover; background-position: center;">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-crimson mb-12 text-center" data-aos="fade-up">What Our Clients Say</h2>
+        <h2 class="text-3xl font-crimson mb-12 text-center " data-aos="fade-up">What Our Clients Say</h2>
 
         <!-- Embla Carousel -->
         <div class="testimonials-embla" data-aos="fade-up">
