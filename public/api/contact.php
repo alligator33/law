@@ -4,28 +4,29 @@ ini_set('display_errors', 1);
 
 header('Content-Type: application/json');
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../backend/db/connection.php';
-require_once __DIR__ . '/../../backend/utils/functions.php';
-require_once __DIR__ . '/../../backend/config/config.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-// Debug logging function
-function logError($message, $context = []) {
-    $timestamp = date('Y-m-d H:i:s');
-    $contextStr = !empty($context) ? " Context: " . json_encode($context) : "";
-    error_log("[$timestamp] $message$contextStr");
+// Custom error handler to catch all types of errors
+function errorHandler($errno, $errstr, $errfile, $errline) {
+    error_log("PHP Error [$errno]: $errstr in $errfile on line $errline");
+    return false;
 }
+set_error_handler("errorHandler");
 
 try {
-    // Log database credentials (without password)
-    logError("Attempting database connection", [
-        'host' => DB_HOST,
-        'dbname' => DB_NAME,
-        'user' => DB_USER
-    ]);
+    // Load configuration first to catch any config errors
+    require_once __DIR__ . '/../../backend/config/config.php';
+    
+    error_log("Configuration loaded successfully");
+    error_log("Database settings: Host=" . DB_HOST . ", Database=" . DB_NAME . ", User=" . DB_USER);
+    
+    // Then try database connection
+    require_once __DIR__ . '/../../backend/db/connection.php';
+    require_once __DIR__ . '/../../backend/utils/functions.php';
+
+    // Rest of your existing code...
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\SMTP;
 
     // Get POST data
     $name = sanitizeInput($_POST['name'] ?? '');
@@ -46,7 +47,7 @@ try {
     $stmt->execute([$name, $email, $message]);
     $contactId = $pdo->lastInsertId();
 
-    logError("Contact saved to database", ['id' => $contactId]);
+    error_log("Contact saved to database with ID: " . $contactId);
 
     // Send email
     $mail = new PHPMailer(true);
@@ -84,7 +85,7 @@ try {
     $mail->AltBody = "Name: $name\nEmail: $email\nMessage: $message";
 
     $mail->send();
-    logError("Email sent successfully", ['contact_id' => $contactId]);
+    error_log("Email sent successfully for contact ID: " . $contactId);
     
     // Update database to mark email as sent
     $stmt = $pdo->prepare("UPDATE contacts SET email_sent = true WHERE id = ?");
@@ -95,29 +96,28 @@ try {
         'message' => 'Thank you! Your message has been received and we will contact you soon.'
     ]);
 
-} catch (Exception $e) {
-    logError("Error in contact form", [
-        'error' => $e->getMessage(),
-        'trace' => $e->getTraceAsString()
+} catch (PDOException $e) {
+    error_log("Database Error: " . $e->getMessage());
+    error_log("Error Code: " . $e->getCode());
+    error_log("SQL State: " . $e->errorInfo[0] ?? 'Unknown');
+    
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Database connection failed. Please try again later.',
+        'debug' => [
+            'error' => $e->getMessage(),
+            'code' => $e->getCode(),
+            'sql_state' => $e->errorInfo[0] ?? 'Unknown'
+        ]
     ]);
+} catch (Exception $e) {
+    error_log("General Error: " . $e->getMessage());
+    error_log("Stack trace: " . $e->getTraceAsString());
     
-    // Save SMTP error if it exists
-    if (isset($contactId) && isset($mail) && $mail->ErrorInfo) {
-        try {
-            $stmt = $pdo->prepare("UPDATE contacts SET smtp_error = ? WHERE id = ?");
-            $stmt->execute([$mail->ErrorInfo, $contactId]);
-            logError("SMTP error saved to database", [
-                'contact_id' => $contactId,
-                'smtp_error' => $mail->ErrorInfo
-            ]);
-        } catch (PDOException $pe) {
-            logError("Could not save SMTP error", [
-                'error' => $pe->getMessage()
-            ]);
-        }
-    }
+    $statusCode = ($e instanceof PDOException) ? 500 : 400;
+    http_response_code($statusCode);
     
-    http_response_code(400);
     echo json_encode([
         'success' => false,
         'message' => $e->getMessage()
