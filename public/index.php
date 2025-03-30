@@ -85,7 +85,7 @@ $homeConfig = $config['pages']['home'];
 <section id="contact" class="py-20 bg-white">
     <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up"><?php echo $config['pages']['contact']['form']['title']; ?></h2>
+            <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Contact Us</h2>
             
             <div id="contactMessage" class="mb-6 p-4 rounded-lg hidden"></div>
             
@@ -114,6 +114,29 @@ $homeConfig = $config['pages']['home'];
                     </button>
                 </div>
             </form>
+
+            <!-- Contact Information -->
+            <div class="mt-12 pt-12 border-t border-gray-200">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-crimson mb-4 text-law-navy">Contact Information</h3>
+                        <p class="text-gray-600 mb-2">Phone: <?php echo htmlspecialchars($config['company_info']['phone']); ?></p>
+                        <p class="text-gray-600 mb-2">Email: <?php echo htmlspecialchars($config['company_info']['email']); ?></p>
+                        <p class="text-gray-600">
+                            <?php echo htmlspecialchars($config['company_info']['address']['line1']); ?><br>
+                            <?php echo htmlspecialchars($config['company_info']['address']['line2']); ?><br>
+                            <?php echo htmlspecialchars($config['company_info']['address']['city']); ?>, 
+                            <?php echo htmlspecialchars($config['company_info']['address']['state']); ?> 
+                            <?php echo htmlspecialchars($config['company_info']['address']['postal_code']); ?>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-crimson mb-4 text-law-navy">Business Hours</h3>
+                        <p class="text-gray-600 mb-2">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                        <p class="text-gray-600">Saturday - Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -126,8 +149,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     const submitButton = this.querySelector('button[type="submit"]');
     const formData = new FormData(this);
     
+    // Disable submit button and show loading state
     submitButton.disabled = true;
-    submitButton.innerHTML = 'Sending...';
+    submitButton.innerHTML = '<span class="inline-flex items-center">Sending...<svg class="animate-spin ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></span>';
     
     try {
         const response = await fetch('/api/contact.php', {
@@ -147,17 +171,17 @@ document.getElementById('contactForm').addEventListener('submit', async function
         }
         
         messageDiv.textContent = result.message;
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         
     } catch (error) {
         messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700');
         messageDiv.classList.add('bg-red-100', 'text-red-700');
-        messageDiv.textContent = '<?php echo $config['pages']['contact']['form']['error_message']; ?>';
+        messageDiv.textContent = 'An error occurred. Please try again later.';
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Send Message';
     }
-    
-    submitButton.disabled = false;
-    submitButton.innerHTML = 'Send Message';
-    
-    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 </script>
 

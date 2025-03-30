@@ -1,7 +1,15 @@
-/vendor/
-/node_modules/
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Environment specific files
 .env
+.env.*
+!.env.example
+
+# Other common ignores
+/vendor/
+node_modules/
 .DS_Store
 *.log
-/public/assets/css/style.css
-composer.phar

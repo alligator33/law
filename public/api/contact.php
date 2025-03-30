@@ -47,7 +47,7 @@ try {
     try {
         $mail = new PHPMailer(true);
         
-        // Enable debug output
+        // Enable debug output for error logging
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $debugOutput = '';
         $mail->Debugoutput = function($str, $level) use (&$debugOutput) {
@@ -59,7 +59,6 @@ try {
         $mail->isSMTP();
         $mail->Host = SMTP_HOST;
         $mail->SMTPAuth = true;
-        $mail->AuthType = 'LOGIN';
         $mail->Username = SMTP_USER;
         $mail->Password = SMTP_PASS;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
@@ -68,7 +67,7 @@ try {
         // Set timeout
         $mail->Timeout = 30;
         
-        // Simple SSL settings
+        // SSL settings
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
@@ -109,7 +108,7 @@ try {
         error_log("Email Error for contact ID $contactId: " . $e->getMessage());
         error_log("SMTP Debug Log:\n" . $debugOutput);
         
-        // Store SMTP error in database
+        // Store SMTP error in database for debugging
         $stmt = $pdo->prepare("UPDATE contacts SET smtp_error = ? WHERE id = ?");
         $stmt->execute([$e->getMessage() . "\n\n" . $debugOutput, $contactId]);
         

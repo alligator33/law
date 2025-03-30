@@ -31,16 +31,16 @@ try {
     $mail->isSMTP();
     $mail->Host = SMTP_HOST;
     $mail->SMTPAuth = true;
-    $mail->AuthType = 'LOGIN';
     $mail->Username = SMTP_USER;
-    $mail->Password = SMTP_PASS;
+    // Use stripslashes to handle any escaped special characters
+    $mail->Password = stripslashes(SMTP_PASS);
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = SMTP_PORT;
     
     // Set timeout
     $mail->Timeout = 30;
     
-    // SSL settings
+    // Simple SSL settings
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
