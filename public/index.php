@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once __DIR__ . '/../backend/utils/functions.php';
 include 'includes/header.php';
 $config = getPageConfig();
@@ -6,11 +6,12 @@ $homeConfig = $config['pages']['home'];
 ?>
 
 <!-- Hero Section -->
-<section >
-<?php include 'includes/hero.php'; ?>
+<section>
+    <?php include 'includes/home/hero.php'; ?>
 
 </section>
-
+<?php include 'includes/home/team.php'; ?>
+<?php include 'includes/home/practice_areas.php'; ?>
 <!-- About Section -->
 <section id="about" class="py-20 bg-white">
     <div class="container mx-auto px-4">
@@ -23,11 +24,13 @@ $homeConfig = $config['pages']['home'];
                 <p class="mb-6 text-gray-600"><?php echo $homeConfig['about']['content']; ?></p>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="text-center p-4 bg-law-gray rounded-lg">
-                        <h3 class="text-2xl font-bold text-law-gold"><?php echo $homeConfig['about']['stats']['cases_won']; ?></h3>
+                        <h3 class="text-2xl font-bold text-law-gold">
+                            <?php echo $homeConfig['about']['stats']['cases_won']; ?></h3>
                         <p class="text-gray-600">Cases Won</p>
                     </div>
                     <div class="text-center p-4 bg-law-gray rounded-lg">
-                        <h3 class="text-2xl font-bold text-law-gold"><?php echo $homeConfig['about']['stats']['success_rate']; ?></h3>
+                        <h3 class="text-2xl font-bold text-law-gold">
+                            <?php echo $homeConfig['about']['stats']['success_rate']; ?></h3>
                         <p class="text-gray-600">Success Rate</p>
                     </div>
                 </div>
@@ -36,60 +39,40 @@ $homeConfig = $config['pages']['home'];
     </div>
 </section>
 
-<!-- Practice Areas Section -->
-<section id="practice-areas" class="py-20 bg-law-gray">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Our Practice Areas</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" style="background-image: url('/assets/images/practices/accident.jpg'); background-size: cover; background-position: center;">
-                <h3 class="text-xl font-bold text-law-navy mb-4">Accident Law</h3>
-                <p class="text-gray-600">We provide expert legal services for accident-related cases.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" style="background-image: url('/assets/images/practices/family.jpg'); background-size: cover; background-position: center;">
-                <h3 class="text-xl font-bold text-law-navy mb-4">Family Law</h3>
-                <p class="text-gray-600">Helping families resolve legal matters with care and expertise.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-up" style="background-image: url('/assets/images/practices/business.jpg'); background-size: cover; background-position: center;">
-                <h3 class="text-xl font-bold text-law-navy mb-4">Business Law</h3>
-                <p class="text-gray-600">Providing legal solutions for businesses of all sizes.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Team Section -->
-<?php include 'includes/team_and_practice_areas.php'; ?>
 
-<?php include 'includes/testimonials.php'; ?>
+
+<?php include 'includes/home/testimonials.php'; ?>
 
 <!-- Contact Section -->
 <section id="contact" class="py-20 bg-white">
     <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up"><?php echo $config['pages']['contact']['form']['title']; ?></h2>
-            
+            <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">
+                <?php echo $config['pages']['contact']['form']['title']; ?></h2>
+
             <div id="contactMessage" class="mb-6 p-4 rounded-lg hidden"></div>
-            
+
             <form id="contactForm" class="space-y-6" data-aos="fade-up">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="name" class="block text-gray-700 mb-2">Name</label>
-                        <input type="text" id="name" name="name" required 
+                        <input type="text" id="name" name="name" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-law-gold focus:border-law-gold">
                     </div>
                     <div>
                         <label for="email" class="block text-gray-700 mb-2">Email</label>
-                        <input type="email" id="email" name="email" required 
+                        <input type="email" id="email" name="email" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-law-gold focus:border-law-gold">
                     </div>
                 </div>
                 <div>
                     <label for="message" class="block text-gray-700 mb-2">Message</label>
-                    <textarea id="message" name="message" rows="6" required 
+                    <textarea id="message" name="message" rows="6" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-law-gold focus:border-law-gold"></textarea>
                 </div>
                 <div class="text-center">
-                    <button type="submit" 
+                    <button type="submit"
                         class="bg-law-navy hover:bg-law-navy/90 text-white px-8 py-3 rounded-lg transition-colors inline-block">
                         Send Message
                     </button>
@@ -100,46 +83,46 @@ $homeConfig = $config['pages']['home'];
 </section>
 
 <script>
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const messageDiv = document.getElementById('contactMessage');
-    const submitButton = this.querySelector('button[type="submit"]');
-    const formData = new FormData(this);
-    
-    submitButton.disabled = true;
-    submitButton.innerHTML = 'Sending...';
-    
-    try {
-        const response = await fetch('/api/contact.php', {
-            method: 'POST',
-            body: formData
-        });
-        
-        const result = await response.json();
-        
-        messageDiv.classList.remove('hidden', 'bg-red-100', 'bg-green-100', 'text-red-700', 'text-green-700');
-        
-        if (response.ok && result.success) {
-            messageDiv.classList.add('bg-green-100', 'text-green-700');
-            this.reset();
-        } else {
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const messageDiv = document.getElementById('contactMessage');
+        const submitButton = this.querySelector('button[type="submit"]');
+        const formData = new FormData(this);
+
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Sending...';
+
+        try {
+            const response = await fetch('/api/contact.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            messageDiv.classList.remove('hidden', 'bg-red-100', 'bg-green-100', 'text-red-700', 'text-green-700');
+
+            if (response.ok && result.success) {
+                messageDiv.classList.add('bg-green-100', 'text-green-700');
+                this.reset();
+            } else {
+                messageDiv.classList.add('bg-red-100', 'text-red-700');
+            }
+
+            messageDiv.textContent = result.message;
+
+        } catch (error) {
+            messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700');
             messageDiv.classList.add('bg-red-100', 'text-red-700');
+            messageDiv.textContent = '<?php echo $config['pages']['contact']['form']['error_message']; ?>';
         }
-        
-        messageDiv.textContent = result.message;
-        
-    } catch (error) {
-        messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700');
-        messageDiv.classList.add('bg-red-100', 'text-red-700');
-        messageDiv.textContent = '<?php echo $config['pages']['contact']['form']['error_message']; ?>';
-    }
-    
-    submitButton.disabled = false;
-    submitButton.innerHTML = 'Send Message';
-    
-    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-});
+
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Send Message';
+
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
 </script>
 
 <?php include 'includes/footer.php'; ?>

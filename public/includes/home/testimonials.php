@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../backend/utils/functions.php';
+require_once __DIR__ . '/../../../backend/utils/functions.php';
 $config = getPageConfig();
 $homeConfig = $config['pages']['home'];
 ?>
@@ -32,8 +32,6 @@ $homeConfig = $config['pages']['home'];
 </section>
 
 <!-- Include Embla Carousel -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/embla-carousel/embla-carousel.min.css">
-<script src="https://cdn.jsdelivr.net/npm/embla-carousel/embla-carousel.umd.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
