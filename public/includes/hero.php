@@ -68,5 +68,20 @@
     align-items: center;
     height: 100%;
     text-align: center;
+    padding: 1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .embla__slide .container h1 {
+        font-size: 2rem;
+    }
+    .embla__slide .container p {
+        font-size: 1rem;
+    }
+    .embla__slide .container a {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
 }
 </style>
