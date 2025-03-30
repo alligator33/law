@@ -8,24 +8,22 @@ $options = [
 ];
 
 try {
-    // Include endpoint ID in the connection string for SNI workaround
-    $endpointId = 'ep-winter-heart-a5mhn4qz';
+    // Use a single connection string for both environments
     $dsn = sprintf(
-        "pgsql:host=%s;dbname=%s;sslmode=require;options=--client_encoding=UTF8 endpoint=%s",
+        "pgsql:host=%s;dbname=%s;sslmode=require",
         DB_HOST,
-        DB_NAME,
-        $endpointId
+        DB_NAME
     );
-    
+
     // Create connection
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-    
+
     // Test the connection
     $pdo->query('SELECT 1');
-    
+
 } catch (PDOException $e) {
     error_log("Database Connection Error: " . $e->getMessage());
-    
+
     if (!headers_sent()) {
         header('HTTP/1.1 500 Internal Server Error');
         header('Content-Type: application/json');
