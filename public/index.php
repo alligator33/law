@@ -57,21 +57,7 @@ $homeConfig = $config['pages']['home'];
     </div>
 </section>
 
-<!-- Team Section -->
-<section id="team" class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-crimson mb-12 text-center text-law-navy" data-aos="fade-up">Our Expert Team</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <?php foreach ($homeConfig['team'] as $index => $member): ?>
-                <div class="text-center" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
-                    <img src="<?php echo $member['image']; ?>" alt="<?php echo $member['name']; ?>" class="w-full h-80 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-crimson mb-2"><?php echo $member['name']; ?></h3>
-                    <p class="text-gray-600"><?php echo $member['role']; ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
+<?php include 'includes/team.php'; ?>
 
 <?php include 'includes/testimonials.php'; ?>
 
