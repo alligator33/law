@@ -14,7 +14,7 @@ try {
     if ($isProduction) {
         // Production: Include endpoint parameter for environments without SNI support
         $dsn = sprintf(
-            "pgsql:host=%s;dbname=%s;sslmode=require?options=endpoint%%3Dep-winter-heart-a5mhn4qz",
+            "pgsql:host=%s;dbname=%s;sslmode=require;options=endpoint%%3Dep-winter-heart-a5mhn4qz",
             DB_HOST,
             DB_NAME
         );
