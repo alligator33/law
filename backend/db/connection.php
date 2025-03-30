@@ -8,8 +8,17 @@ $options = [
 ];
 
 try {
-    // Construct DSN for Neon PostgreSQL
-    $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+    // Check if we're connecting to Neon PostgreSQL
+    $isNeon = strpos(DB_HOST, 'neon.tech') !== false;
+    
+    // Construct DSN based on environment
+    if ($isNeon) {
+        // Production with Neon PostgreSQL
+        $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";sslmode=require";
+    } else {
+        // Local development
+        $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+    }
     
     // Create connection
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
