@@ -8,10 +8,20 @@ $options = [
 ];
 
 try {
-    // Construct Neon database DSN with system SSL certificates
-    $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";sslmode=verify-full;sslrootcert=system";
+    // Determine SSL mode based on environment
+    $sslMode = "require";  // Default to require SSL
+    
+    // Construct DSN with SSL mode
+    $dsn = sprintf(
+        "pgsql:host=%s;dbname=%s;sslmode=%s",
+        DB_HOST,
+        DB_NAME,
+        $sslMode
+    );
+    
+    // Create connection
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-
+    
     // Test the connection
     $pdo->query('SELECT 1');
 } catch (PDOException $e) {
