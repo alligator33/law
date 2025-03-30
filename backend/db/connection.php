@@ -8,33 +8,41 @@ $options = [
 ];
 
 try {
-    // Check if we're connecting to Neon PostgreSQL
-    $isNeon = strpos(DB_HOST, 'neon.tech') !== false;
+    // Construct basic DSN with SSL required and timeout
+    $dsn = sprintf(
+        "pgsql:host=%s;dbname=%s;sslmode=require;connect_timeout=5",
+        DB_HOST,
+        DB_NAME
+    );
     
-    // Construct DSN based on environment
-    if ($isNeon) {
-        // Production with Neon PostgreSQL
-        $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";sslmode=require";
-    } else {
-        // Local development
-        $dsn = "pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME;
-    }
+    error_log("Attempting database connection to: " . DB_HOST);
     
     // Create connection
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
     
     // Test the connection
     $pdo->query('SELECT 1');
+    error_log("Database connection successful");
     
 } catch (PDOException $e) {
-    error_log("Database Connection Error: " . $e->getMessage());
+    error_log("Database Connection Error Details:");
+    error_log("Error Message: " . $e->getMessage());
+    error_log("Error Code: " . $e->getCode());
+    error_log("Connection Parameters (without password):");
+    error_log("Host: " . DB_HOST);
+    error_log("Database: " . DB_NAME);
+    error_log("User: " . DB_USER);
     
     if (!headers_sent()) {
         header('HTTP/1.1 500 Internal Server Error');
         header('Content-Type: application/json');
         echo json_encode([
             'success' => false, 
-            'message' => 'Database connection failed'
+            'message' => 'Database connection failed',
+            'debug' => [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ]
         ]);
     }
     exit;
