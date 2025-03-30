@@ -33,6 +33,7 @@
 <!-- Include Embla Carousel -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/embla-carousel/embla-carousel.min.css">
 <script src="https://cdn.jsdelivr.net/npm/embla-carousel/embla-carousel.umd.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const emblaNode = document.querySelector('.embla');
