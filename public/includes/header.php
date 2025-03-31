@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Law Firm - Excellence in Legal Services</title>
+    <title>Lexfirm Global- Excellence in Legal Services</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -62,7 +62,7 @@
     <nav class="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
         <div class="container mx-auto px-4">
             <div class="navbar">
-                <a href="/" class="text-2xl font-crimson font-bold text-law-navy">Law Firm</a>
+                <a href="/" class="text-2xl font-crimson font-bold text-law-navy">Lexfirm Global</a>
                 <div class="navbar-links hidden md:flex space-x-8">
                     <a href="/" class="text-gray-700 hover:text-law-gold transition-colors">Home</a>
                     <a href="/#about" class="text-gray-700 hover:text-law-gold transition-colors">About</a>

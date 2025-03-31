@@ -1,6 +1,6 @@
 {
     "name": "law-firm/website",
-    "description": "Law Firm Website with API Endpoints",
+    "description": "Lexfirm Global",
     "type": "project",
     "autoload": {
         "psr-4": {

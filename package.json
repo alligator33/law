@@ -1,7 +1,7 @@
 {
   "name": "law-firm-website",
   "version": "1.0.0",
-  "description": "Law firm single page website",
+  "description": "Lexfirm Global",
   "scripts": {
     "build": "tailwindcss -i ./src/css/input.css -o ./public/styles/style.css --watch",
     "start": "php -S localhost:8000 -t public"
